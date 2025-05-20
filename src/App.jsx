@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./App.module.css";
-
+import { Header } from "./components/Header/Header";
+import { Courses } from "./components/Courses/Courses";
+import { CourseInfo } from "./components/CourseInfo/CourseInfo";
+import { mockedAuthorsList, mockedCoursesList } from "./constants";
+import { Button } from './common/Button/Button';
 // Module 1:
 // * use mockedAuthorsList and mockedCoursesList mocked data
 // * add next components to the App component: Header, Courses and CourseInfo
@@ -30,12 +34,30 @@ import styles from "./App.module.css";
 // * get authorized user info by 'user/me' GET request if 'localStorage' contains token
 
 function App() {
-  // write your code here
+  const [showCourseId, setShowCourseId] = useState(null);
 
+  const handleShowCourse = (id) => {
+    setShowCourseId(id);
+  };
   return (
     <div className={styles.wrapper}>
-      {/* place Header component */}
-      <div className={styles.container}>{/* place other components */}</div>
+      <Header />
+      <div className={styles.container}>
+        {showCourseId ? (
+          <CourseInfo
+            coursesList={mockedCoursesList}
+            authorsList={mockedAuthorsList}
+            showCourseId={showCourseId}
+            onBack={() => setShowCourseId(null)}
+          />
+        ) : (
+          <Courses
+            coursesList={mockedCoursesList}
+            authorsList={mockedAuthorsList}
+            handleShowCourse={handleShowCourse}
+          />
+        )}
+      </div>
     </div>
   );
 }

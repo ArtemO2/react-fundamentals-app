@@ -1,7 +1,9 @@
 import React from "react";
+import { CourseCard } from "./components/CourseCard/CourseCard.jsx";
+import { Button } from '../../common/Button/Button';
 
 import styles from "./styles.module.css";
-
+import { mockedCoursesList, mockedAuthorsList } from "../../constants";
 // Module 1:
 // * render list of components using 'CourseCard' component for each course
 // * render 'ADD NEW COURSE' button (reuse Button component)
@@ -34,16 +36,38 @@ import styles from "./styles.module.css";
 
 export const Courses = ({ coursesList, authorsList, handleShowCourse }) => {
   // write your code here
-
+  const courses = mockedCoursesList;
+  const authors = mockedAuthorsList;
+  const handleShowCourse = () => {
+    console.log('Course clicked');
+  };
   // for EmptyCourseList component container use data-testid="emptyContainer" attribute
   // for button in EmptyCourseList component add data-testid="addCourse" attribute
 
   return (
     <>
       <div className={styles.panel}>
-        // reuse Button component for 'ADD NEW COURSE' button
+        <Button buttonText="ADD NEW COURSE" data-testid="addCourse" />
       </div>
-      // use '.map' array method to render all courses. Use CourseCard component
+      
+      {isCoursesEmpty ? (
+        <div className={styles.emptyContainer} data-testid="emptyContainer">
+          <h2>Your List Is Empty</h2>
+          <p>Please use "Add New Course" button to add your first course</p>
+          <Button buttonText="ADD NEW COURSE" data-testid="addCourse" />
+        </div>
+      ) : (
+        <div className={styles.courseList}>
+          {courses.map((course) => (
+            <CourseCard
+              key={course.id}
+              course={course}
+              authorsList={authors}
+              handleShowCourse={handleShowCourse}
+            />
+          ))}
+        </div>
+      )}
     </>
   );
 };

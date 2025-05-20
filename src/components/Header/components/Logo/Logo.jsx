@@ -1,4 +1,5 @@
 import React from "react";
+// import logo from "../../../../../assets/logo.svg"; адские траблы с маршрутизацией я сгорел
 
 import styles from "./styles.module.css";
 

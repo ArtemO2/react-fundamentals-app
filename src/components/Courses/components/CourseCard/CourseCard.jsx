@@ -45,7 +45,16 @@ import editIcon from "../../../../assets/editButtonIcon.svg";
 import styles from "./styles.module.css";
 
 export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
-  // write your code here
+  const { title, description, creationDate, duration, authors, id } = course;
+
+  const authorNames = authors
+    .map((authorId) => {
+      const author = authorsList.find((a) => a.id === authorId);
+      return author ? author.name : null;
+    })
+    .filter(Boolean)
+    .join(", ");
+
 
   return (
     <div className={styles.cardContainer} data-testid="courseCard">
@@ -56,24 +65,22 @@ export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
       <div className={styles.cardDetails}>
         <p>
           <b>Authors: </b>
-          authors list
+          <span className={styles.authorsList}>{authorNames}</span>
         </p>
         <p>
           <b>Duration:</b>
-          <span>duration</span>
+          <span>{getCourseDuration(duration)}</span>
         </p>
         <p>
           <b>Created: </b>
-          <span>date</span>
+          <span>{formatCreationDate(creationDate)}</span>
         </p>
         <div className={styles.buttonsContainer}>
-          {/* 
-				reuse Button component for 'Show course' button 
-				reuse Button	component with deleteButtonIcon from 'src/assets' for 'Delete' button
-						with data-testid="deleteCourse" 
-				reuse Button component wrapped with Link from react-router with editButtonIcon from 'src/assets' for 'Update' button with
-						data-testid="updateCourse" 
-			*/}
+          <Button
+            buttonText="SHOW COURSE"
+            handleClick={() => handleShowCourse(id)}
+            data-testid="showCourse"
+          />
         </div>
       </div>
     </div>

@@ -38,11 +38,21 @@ export const CourseInfo = ({
   onBack,
   showCourseId,
 }) => {
-  // write your code here
+  const course = coursesList.find((course) => course.id === showCourseId);
+
+  if (!course) {
+    return <p>Course not found.</p>;
+  }
+
+  const { id, title, description, duration, creationDate, authors } = course;
+
+  const courseAuthors = authors
+    .map((authorId) => authorsList.find((author) => author.id === authorId))
+    .filter(Boolean);
 
   return (
     <div className={styles.container} data-testid="courseInfo">
-      <h1>Course title</h1>
+      <h1>{title}</h1>
       <div className={styles.courseInfo}>
         <p className={styles.description}>Course description</p>
         <div>
@@ -52,23 +62,23 @@ export const CourseInfo = ({
           </p>
           <p>
             <b>Duration: </b>
-            duration (use getCourseDuration)
+            {getCourseDuration(duration)}
           </p>
           <p>
             <b>Created: </b>
-            creation date (use formatCreationDate)
+            {formatCreationDate(creationDate)}
           </p>
           <div>
             <b>Authors</b>
             <ul className={styles.authorsList}>
-              //use '.map' to render authors list with 'li' tag
+              {courseAuthors.map((author) => (
+                <li key={author.id}>{author.name}</li>
+              ))}
             </ul>
           </div>
         </div>
       </div>
-      // Module 1: reuse Button component for 'onBack' functionality // Module
-      2: use 'react-router-dom' 'Link' component for button 'Back' and remove
-      'onBack' prop
+      <Button buttonText="Back to courses" onClick={onBack} />
     </div>
   );
 };
