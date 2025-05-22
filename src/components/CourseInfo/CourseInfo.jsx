@@ -23,7 +23,7 @@
 // * use selectors from store/selectors.js to get coursesList, authorsList from store
 
 import React from "react";
-
+import { Button } from "../../common";
 import { formatCreationDate, getCourseDuration } from "../../helpers";
 
 import styles from "./styles.module.css";
@@ -44,7 +44,10 @@ export const CourseInfo = ({
     return <p>Course not found.</p>;
   }
 
-  const { id, title, description, duration, creationDate, authors } = course;
+  const { title, duration, creationDate, authors } = course;
+  // удалил id и description eslint ругался на возможные ошибки
+  //  47:11  warning  'id' is assigned a value but never used           no-unused-vars
+  //   47:22  warning  'description' is assigned a value but never used  no-unused-vars
 
   const courseAuthors = authors
     .map((authorId) => authorsList.find((author) => author.id === authorId))

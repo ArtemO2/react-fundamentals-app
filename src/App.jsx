@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./App.module.css";
-import { Header } from "./components/Header/Header";
-import { Courses } from "./components/Courses/Courses";
-import { CourseInfo } from "./components/CourseInfo/CourseInfo";
-import { mockedAuthorsList, mockedCoursesList } from "./constants";
-import { Button } from './common/Button/Button';
+import { Header, Courses, CourseInfo } from "./components";
+import { mockedCoursesList, mockedAuthorsList } from "./constants";
+
 // Module 1:
 // * use mockedAuthorsList and mockedCoursesList mocked data
 // * add next components to the App component: Header, Courses and CourseInfo
@@ -14,7 +12,7 @@ import { Button } from './common/Button/Button';
 // Module 2:
 // * use mockedAuthorsList and mockedCoursesList mocked data
 // * remove useState for selected courseId
-// * use hook useState for storing list of courses and authors 
+// * use hook useState for storing list of courses and authors
 // * import Routes and Route from 'react-router-dom'
 // * Add Routes to the container div (do not include Header to the Routes since header will not be changed with pages)
 // ** TASK DESCRIPTION ** - https://react-fundamentals-tasks.vercel.app/docs/module-2/home-task/components#add-the-router-to-the-app-component
@@ -36,8 +34,8 @@ import { Button } from './common/Button/Button';
 function App() {
   const [showCourseId, setShowCourseId] = useState(null);
 
-  const handleShowCourse = (id) => {
-    setShowCourseId(id);
+  const handleShowCourse = (courseid) => {
+    setShowCourseId(courseid);
   };
   return (
     <div className={styles.wrapper}>

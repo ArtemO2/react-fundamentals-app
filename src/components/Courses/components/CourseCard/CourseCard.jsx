@@ -36,17 +36,18 @@
 //   ** CourseCard should display created date in the correct format.
 
 import React from "react";
+import { Button } from "../../../../common/Button/Button";
 
 import { getCourseDuration, formatCreationDate } from "../../../../helpers";
-
-import deleteIcon from "../../../../assets/deleteButtonIcon.svg";
-import editIcon from "../../../../assets/editButtonIcon.svg";
+// скрыл потому что гит не хотел грузить
+// import deleteIcon from "../../../../assets/deleteButtonIcon.svg";
+// import editIcon from "../../../../assets/editButtonIcon.svg";
 
 import styles from "./styles.module.css";
 
 export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
-  const { title, description, creationDate, duration, authors, id } = course;
-
+  const { creationDate, duration, authors, id } = course;
+  // скрыл title, description,   eslint ругался на возможные ошибки
   const authorNames = authors
     .map((authorId) => {
       const author = authorsList.find((a) => a.id === authorId);
@@ -54,7 +55,6 @@ export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
     })
     .filter(Boolean)
     .join(", ");
-
 
   return (
     <div className={styles.cardContainer} data-testid="courseCard">

@@ -1,6 +1,6 @@
 import React from "react";
 import { CourseCard } from "./components/CourseCard/CourseCard.jsx";
-import { Button } from '../../common/Button/Button';
+import { Button } from "../../common/Button/Button";
 
 import styles from "./styles.module.css";
 import { mockedCoursesList, mockedAuthorsList } from "../../constants";
@@ -34,13 +34,15 @@ import { mockedCoursesList, mockedAuthorsList } from "../../constants";
 //   ** Courses should display amount of CourseCard equal length of courses array.
 //   ** CourseForm should be shown after a click on the "Add new course" button.
 
-export const Courses = ({ coursesList, authorsList, handleShowCourse }) => {
+export const Courses = () => {
   // write your code here
   const courses = mockedCoursesList;
   const authors = mockedAuthorsList;
   const handleShowCourse = () => {
-    console.log('Course clicked');
+    console.log("Course clicked");
   };
+  const isCoursesEmpty = courses.length === 0;
+
   // for EmptyCourseList component container use data-testid="emptyContainer" attribute
   // for button in EmptyCourseList component add data-testid="addCourse" attribute
 
@@ -49,7 +51,6 @@ export const Courses = ({ coursesList, authorsList, handleShowCourse }) => {
       <div className={styles.panel}>
         <Button buttonText="ADD NEW COURSE" data-testid="addCourse" />
       </div>
-      
       {isCoursesEmpty ? (
         <div className={styles.emptyContainer} data-testid="emptyContainer">
           <h2>Your List Is Empty</h2>
