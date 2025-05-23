@@ -46,8 +46,8 @@ import { getCourseDuration, formatCreationDate } from "../../../../helpers";
 import styles from "./styles.module.css";
 
 export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
-  const { creationDate, duration, authors, id } = course;
-  // скрыл title, description,   eslint ругался на возможные ошибки
+  const { title, description, creationDate, duration, authors, id } = course;
+
   const authorNames = authors
     .map((authorId) => {
       const author = authorsList.find((a) => a.id === authorId);
@@ -59,8 +59,8 @@ export const CourseCard = ({ course, handleShowCourse, authorsList }) => {
   return (
     <div className={styles.cardContainer} data-testid="courseCard">
       <div className={styles.cardText}>
-        <h2>Title</h2>
-        <p>Description</p>
+        <h2>{title}</h2>
+        <p>{description}</p>
       </div>
       <div className={styles.cardDetails}>
         <p>

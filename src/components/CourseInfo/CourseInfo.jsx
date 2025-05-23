@@ -44,7 +44,7 @@ export const CourseInfo = ({
     return <p>Course not found.</p>;
   }
 
-  const { title, duration, creationDate, authors } = course;
+  const { id, description, title, duration, creationDate, authors } = course;
   // удалил id и description eslint ругался на возможные ошибки
   //  47:11  warning  'id' is assigned a value but never used           no-unused-vars
   //   47:22  warning  'description' is assigned a value but never used  no-unused-vars
@@ -57,11 +57,11 @@ export const CourseInfo = ({
     <div className={styles.container} data-testid="courseInfo">
       <h1>{title}</h1>
       <div className={styles.courseInfo}>
-        <p className={styles.description}>Course description</p>
+        <p className={styles.description}>{description}</p>
         <div>
           <p>
             <b>ID: </b>
-            id
+            {id}
           </p>
           <p>
             <b>Duration: </b>
@@ -74,14 +74,14 @@ export const CourseInfo = ({
           <div>
             <b>Authors</b>
             <ul className={styles.authorsList}>
-              {courseAuthors.map((author) => (
-                <li key={author.id}>{author.name}</li>
+              {courseAuthors.map(({ id, name }) => (
+                <li key={id}>{name}</li>
               ))}
             </ul>
           </div>
         </div>
       </div>
-      <Button buttonText="Back to courses" onClick={onBack} />
+      <Button buttonText="Back to courses" handleClick={onBack} />
     </div>
   );
 };

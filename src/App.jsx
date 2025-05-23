@@ -33,25 +33,30 @@ import { mockedCoursesList, mockedAuthorsList } from "./constants";
 
 function App() {
   const [showCourseId, setShowCourseId] = useState(null);
+  const [courses] = useState(mockedCoursesList);
+  const [authors] = useState(mockedAuthorsList);
 
   const handleShowCourse = (courseid) => {
     setShowCourseId(courseid);
   };
+
+  const handleHideCourseInfo = () => setShowCourseId(null);
+
   return (
     <div className={styles.wrapper}>
       <Header />
       <div className={styles.container}>
         {showCourseId ? (
           <CourseInfo
-            coursesList={mockedCoursesList}
-            authorsList={mockedAuthorsList}
+            coursesList={courses}
+            authorsList={authors}
             showCourseId={showCourseId}
-            onBack={() => setShowCourseId(null)}
+            onBack={handleHideCourseInfo}
           />
         ) : (
           <Courses
-            coursesList={mockedCoursesList}
-            authorsList={mockedAuthorsList}
+            coursesList={courses}
+            authorsList={authors}
             handleShowCourse={handleShowCourse}
           />
         )}

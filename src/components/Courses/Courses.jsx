@@ -1,9 +1,10 @@
 import React from "react";
-import { CourseCard } from "./components/CourseCard/CourseCard.jsx";
+import { CourseCard } from "./components/CourseCard";
 import { Button } from "../../common/Button/Button";
 
 import styles from "./styles.module.css";
-import { mockedCoursesList, mockedAuthorsList } from "../../constants";
+import { EmptyCourseList } from "./components/EmptyCourseList";
+
 // Module 1:
 // * render list of components using 'CourseCard' component for each course
 // * render 'ADD NEW COURSE' button (reuse Button component)
@@ -34,40 +35,38 @@ import { mockedCoursesList, mockedAuthorsList } from "../../constants";
 //   ** Courses should display amount of CourseCard equal length of courses array.
 //   ** CourseForm should be shown after a click on the "Add new course" button.
 
-export const Courses = () => {
+export const Courses = ({ coursesList, authorsList, handleShowCourse }) => {
   // write your code here
-  const courses = mockedCoursesList;
-  const authors = mockedAuthorsList;
-  const handleShowCourse = () => {
-    console.log("Course clicked");
-  };
-  const isCoursesEmpty = courses.length === 0;
+
+  const isCoursesEmpty = coursesList.length === 0;
 
   // for EmptyCourseList component container use data-testid="emptyContainer" attribute
   // for button in EmptyCourseList component add data-testid="addCourse" attribute
 
   return (
     <>
-      <div className={styles.panel}>
-        <Button buttonText="ADD NEW COURSE" data-testid="addCourse" />
-      </div>
       {isCoursesEmpty ? (
-        <div className={styles.emptyContainer} data-testid="emptyContainer">
-          <h2>Your List Is Empty</h2>
-          <p>Please use "Add New Course" button to add your first course</p>
-          <Button buttonText="ADD NEW COURSE" data-testid="addCourse" />
-        </div>
+        <EmptyCourseList data-testid="emptyContainer" />
       ) : (
-        <div className={styles.courseList}>
-          {courses.map((course) => (
-            <CourseCard
-              key={course.id}
-              course={course}
-              authorsList={authors}
-              handleShowCourse={handleShowCourse}
+        <>
+          <div className={styles.panel}>
+            <Button
+              buttonText="ADD NEW COURSE"
+              data-testid="addCourse"
+              handleClick={() => {}}
             />
-          ))}
-        </div>
+          </div>
+          <div className={styles.courseList}>
+            {coursesList.map((course) => (
+              <CourseCard
+                key={course.id}
+                course={course}
+                authorsList={authorsList}
+                handleShowCourse={handleShowCourse}
+              />
+            ))}
+          </div>
+        </>
       )}
     </>
   );
